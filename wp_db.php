@@ -1,3 +1,23 @@
+/***********
+***** CREATE WP-Pagination using SQL Query *****
+***********/
+global $wpdb, $max_num_pages, $paged;
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$post_per_page = 10;
+$offset = ($paged - 1) * $post_per_page;
+
+$query = "SELECT SQL_CALC_FOUND_ROWS * FROM $table LIMIT $offset, $post_per_page";
+$result = $wpdb->get_results($query);
+$sql_posts_total = $wpdb->get_var( "SELECT FOUND_ROWS();" );
+$max_num_pages = ceil($sql_posts_total / $post_per_page);
+
+<div class="navigation">
+     <div class="previous panel"><?php previous_posts_link('&laquo; Prev', $max_num_pages) ?></div>
+     <div class="next panel"><?php next_posts_link('Next &raquo;', $max_num_pages) ?></div>
+</div>
+
+
+
 /**********
 ***** JOIN Query in wordpress. This was getting values based on 'tag id' and 'search item' *****
 *********/
