@@ -22,6 +22,8 @@ $wpdb->query(
                    WHERE id = "'.$delIds.'"'
                 ); //Use SQL query to delete from particular table
 
+$wpdb->update($table_name , array('user_name' => $user_name, 'post_id' =>$postID, 'time' => $visittime),array('%s','%d', '%d') ); //Use SQL query to update table
+
 /***********
 ***** CREATE WP-Pagination using SQL Query *****
 ***********/
