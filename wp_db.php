@@ -5,6 +5,7 @@ global $wpdb, $table_prefix;
 $table_name = $table_prefix . 'table_name';
 $charset_collate = $wpdb->get_charset_collate();
 
+//Use to create new table in database
 $sql = "CREATE TABLE IF NOT EXISTS ".$table_name."(
                     id int(9) NOT NULL AUTO_INCREMENT,
                     name varchar(40) NOT NULL,
@@ -13,16 +14,19 @@ $sql = "CREATE TABLE IF NOT EXISTS ".$table_name."(
                     PRIMARY KEY(id))
                     ".$charset_collate."";
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-dbDelta($sql); //Use to create new table in database
+dbDelta($sql); 
 
-$wpdb->get_results("sql_syntax"); //Use SQL query to get result
+//Use SQL query to get result
+$wpdb->get_results("sql_syntax"); 
 
+//Use SQL query to delete from particular table
 $wpdb->query(
                   'DELETE  FROM '.$table_name.'
                    WHERE id = "'.$delIds.'"'
-                ); //Use SQL query to delete from particular table
+                ); 
 
-$wpdb->update($table_name , array('user_name' => $user_name, 'post_id' =>$postID, 'time' => $visittime),array('%s','%d', '%d') ); //Use SQL query to update table
+//Use SQL query to update table
+$wpdb->update($table_name , array('user_name' => $user_name, 'post_id' =>$postID, 'time' => $visittime),array('%s','%d', '%d') ); 
 
 /***********
 ***** CREATE WP-Pagination using SQL Query *****
