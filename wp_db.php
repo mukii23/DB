@@ -1,4 +1,28 @@
 /***********
+***** Start SQL Queries *****
+***********/
+global $wpdb, $table_prefix;
+$table_name = $table_prefix . 'table_name';
+$charset_collate = $wpdb->get_charset_collate();
+
+$sql = "CREATE TABLE IF NOT EXISTS ".$table_name."(
+                    id int(9) NOT NULL AUTO_INCREMENT,
+                    name varchar(40) NOT NULL,
+                    email varchar(50) NOT NULL,
+                    search_term text NOT NULL,
+                    PRIMARY KEY(id))
+                    ".$charset_collate."";
+require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+dbDelta($sql); //Use to create new table in database
+
+$wpdb->get_results("sql_syntax"); //Use SQL query to get result
+
+$wpdb->query(
+                  'DELETE  FROM '.$table_name.'
+                   WHERE id = "'.$delIds.'"'
+                ); //Use SQL query to delete from particular table
+
+/***********
 ***** CREATE WP-Pagination using SQL Query *****
 ***********/
 global $wpdb, $max_num_pages, $paged;
