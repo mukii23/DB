@@ -2,6 +2,9 @@
 ***** Start SQL Queries *****
 ***********/
 global $wpdb, $table_prefix;
+
+//Use $table_prefix or $wpdb->prefix
+
 $table_name = $table_prefix . 'table_name';
 $charset_collate = $wpdb->get_charset_collate();
 
